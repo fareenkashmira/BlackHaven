@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Black Haven | Store</title>
+
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root{
+  --white:#fff;
+  --black:#000;
+  --maroon:#800020;
+  --gold:#e3b54d;
+  --pink:#ffd4e5;
+}
+
+/* GLOBAL */
+body{
+  margin:0;
+  font-family:'Outfit', sans-serif;
+  background:white;
+  color:black;
+}
+
+/* NAV */
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1.5rem 3rem;
+  border-bottom:1px solid #eee;
+}
+
+.logo-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo-wrap img{
+  width:40px;
+  height:40px;
+}
+
+.logo{
+  font-family:'Playfair Display', serif;
+  letter-spacing:3px;
+  color:var(--gold);
+  font-size:1.4rem;
+}
+
+nav ul{
+  display:flex;
+  gap:2rem;
+  list-style:none;
+}
+
+nav a{
+  text-decoration:none;
+  font-family:'Outfit';
+  font-size:0.9rem;
+  letter-spacing:1.5px;
+  color:black;
+  transition:0.3s;
+}
+
+nav a:hover{
+  color:var(--maroon);
+}
+
+/* SECTION */
+.section{
+  padding:5rem 3rem;
+}
+
+.section-title{
+  font-family:'Playfair Display', serif;
+  font-size:2.8rem;
+  letter-spacing:2px;
+  color:var(--maroon);
+  margin-bottom:0.5rem;
+}
+
+.section-subtitle{
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.2rem;
+  color:#555;
+  margin-bottom:3rem;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:2rem;
+}
+
+/* CARD */
+.card{
+  border:1px solid #eee;
+  padding:1rem;
+  transition:0.4s;
+  background:white;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+  border-color:var(--maroon);
+}
+
+/* IMAGE */
+.card img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+}
+
+/* TITLE */
+.card h3{
+  font-family:'Playfair Display';
+  font-size:1.2rem;
+  margin:1rem 0 0.3rem;
+}
+
+/* PRICE */
+.price{
+  font-family:'Cormorant Garamond';
+  font-size:1.2rem;
+  letter-spacing:1px;
+  color:var(--maroon);
+}
+
+/* BUTTON */
+.btn{
+  display:inline-block;
+  margin-top:0.8rem;
+  padding:0.5rem 1.2rem;
+  border:1px solid var(--maroon);
+  text-decoration:none;
+  color:var(--maroon);
+  font-size:0.8rem;
+  letter-spacing:1px;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:var(--maroon);
+  color:white;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  display:block;
+  text-align:center;
+  margin-top:0.7rem;
+  background:var(--gold);
+  color:black;
+  padding:0.6rem;
+  text-decoration:none;
+  font-weight:600;
+  font-size:0.85rem;
+}
+
+/* FOOTER */
+footer{
+  background:linear-gradient(180deg,#800020,#2a0a12);
+  color:white;
+  padding:3rem;
+  text-align:center;
+}
+
+footer a{
+  color:var(--pink);
+  margin:0 1rem;
+  text-decoration:none;
+  font-size:0.85rem;
+}
+
+footer i{
+  color:var(--gold);
+  font-size:1.2rem;
+  transition:0.3s;
+}
+
+footer i:hover{
+  color:white;
+  transform:scale(1.2);
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-wrap">
+    <img src="images/BH.png" alt="logo">
+    <div class="logo">BLACK HAVEN</div>
+  </div>
+
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="studio.html">Studio</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ABAYAS -->
+<section class="section">
+  <h2 class="section-title">Abayas</h2>
+  <p class="section-subtitle">Timeless silhouettes crafted for modern elegance</p>
+
+  <div class="grid">
+    <div class="card">
+      <img src="images/abaya1.jpg">
+      <h3>Classic Black Abaya</h3>
+      <p class="price">₹4,500</p>
+      <a href="#" class="btn">Add to Cart</a>
+      <a href="https://wa.me/917011403207?text=I want to order Classic Black Abaya" class="whatsapp">
+        Order on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PURSE -->
+<section class="section">
+  <h2 class="section-title">Purse</h2>
+  <p class="section-subtitle">Refined pieces that complete your look</p>
+
+  <div class="grid">
+    <div class="card">
+      <img src="images/purse1.jpg">
+      <h3>Elegant Leather Purse</h3>
+      <p class="price">₹2,800</p>
+      <a href="#" class="btn">Add to Cart</a>
+      <a href="https://wa.me/917011403207?text=I want to order Elegant Leather Purse" class="whatsapp">
+        Order on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESSORIES -->
+<section class="section">
+  <h2 class="section-title">Accessories</h2>
+  <p class="section-subtitle">Subtle details that elevate every outfit</p>
+
+  <div class="grid">
+    <div class="card">
+      <img src="images/accessory1.jpg">
+      <h3>Golden Bracelet</h3>
+      <p class="price">₹1,200</p>
+      <a href="#" class="btn">Add to Cart</a>
+      <a href="https://wa.me/917011403207?text=I want to order Golden Bracelet" class="whatsapp">
+        Order on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+  <!-- LOGO -->
+  <div style="display:flex;justify-content:center;align-items:center;gap:10px;">
+    <img src="images/BH.png" style="width:45px;">
+    <div style="font-family:'Playfair Display';letter-spacing:3px;font-size:1.5rem;">
+      BLACK HAVEN
+    </div>
+  </div>
+
+  <!-- LINKS -->
+  <div style="margin-top:1.5rem;">
+    <a href="#">Terms & Conditions</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Shipping Policy</a>
+    <a href="#">Returns</a>
+  </div>
+
+  <!-- SOCIAL -->
+  <div style="margin-top:2rem;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
+    <a href="https://wa.me/+917011403207"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://t.me/+917011403207"><i class="fab fa-telegram"></i></a>
+    <a href="https://www.instagram.com/ablackhaven"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.youtube.com/@ablackhaven"><i class="fab fa-youtube"></i></a>
+    <a href="https://in.pinterest.com/ablackhaven"><i class="fab fa-pinterest"></i></a>
+  </div>
+
+  <p style="margin-top:2rem;font-size:0.8rem;">
+    © 2025 Black Haven. All rights reserved.
+  </p>
+
+</footer>
+
+</body>
+</html>
