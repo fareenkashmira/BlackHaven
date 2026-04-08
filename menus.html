@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menus Categories — Black Haven</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#0f1e3d;--maroon:#8b0022;--gold:#c9a84c;--gold-light:#e5c97a;--white:#ffffff;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'DM Sans',sans-serif;background:linear-gradient(160deg,#0a1428 0%,#0f1e3d 45%,#1a0a12 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:3rem 1.5rem;}
+    .card{width:100%;max-width:460px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(201,168,76,0.25);border-radius:4px;padding:3rem 2.5rem;position:relative;}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#c9a84c,#8b0022,#c9a84c,transparent);border-radius:4px 4px 0 0;}
+    .ornament{text-align:center;margin-bottom:0.5rem;font-size:12px;letter-spacing:0.35em;color:rgba(201,168,76,0.5);text-transform:uppercase;}
+    .title{font-family:'Cinzel',serif;font-size:1.7rem;font-weight:700;text-align:center;color:#fff;letter-spacing:0.06em;margin-bottom:0.4rem;line-height:1.2;}
+    .title span{color:#c9a84c;}
+    .subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;color:rgba(255,255,255,0.4);text-align:center;margin-bottom:2rem;letter-spacing:0.02em;}
+    .divider{display:flex;align-items:center;gap:12px;margin-bottom:2rem;}
+    .divider::before,.divider::after{content:'';flex:1;height:0.5px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4),transparent);}
+    .gem{width:6px;height:6px;background:#c9a84c;transform:rotate(45deg);flex-shrink:0;}
+    .buttons{display:flex;flex-direction:column;gap:10px;}
+    .btn{text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border:0.5px solid rgba(201,168,76,0.2);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.75);font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;transition:all 0.3s ease;position:relative;overflow:hidden;}
+    .btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,#c9a84c,#8b0022);transform:scaleY(0);transition:transform 0.3s ease;transform-origin:bottom;}
+    .btn:hover{background:rgba(201,168,76,0.06);border-color:rgba(201,168,76,0.5);color:#c9a84c;padding-left:24px;}
+    .btn:hover::before{transform:scaleY(1);}
+    .btn-arrow{font-size:10px;letter-spacing:0;opacity:0.4;transition:opacity 0.3s,transform 0.3s;}
+    .btn:hover .btn-arrow{opacity:1;transform:translateX(3px);}
+    .btn.primary{background:linear-gradient(135deg,#0f1e3d 0%,#1a0a12 100%);border:0.5px solid rgba(201,168,76,0.5);color:#c9a84c;}
+    .btn.primary:hover{background:linear-gradient(135deg,#c9a84c 0%,#e5c97a 100%);border-color:#c9a84c;color:#0f1e3d;padding-left:24px;}
+    .footer{text-align:center;margin-top:2rem;font-size:0.65rem;letter-spacing:0.2em;color:rgba(201,168,76,0.25);text-transform:uppercase;}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <p class="ornament">Black Haven</p>
+    <h1 class="title">Menu <span>Design</span></h1>
+    <p class="subtitle">Select your category to begin</p>
+    <div class="divider"><div class="gem"></div></div>
+    <div class="buttons">
+      <a href="ember&oak.html" class="btn primary"><span>Ember & Oak</span><span class="btn-arrow">&#8594;</span></a>
+      <a href="cakesncream.html" class="btn"><span>Caskes n Cream</span><span class="btn-arrow">&#8594;</span></a>
+      <a href="qutubdarbar.html" class="btn"><span>Qutub Darbar</span><span class="btn-arrow">&#8594;</span></a>
+      <a href="blackhaven.html" class="btn"><span>Black Haven</span><span class="btn-arrow">&#8594;</span></a>
+    </div>
+    <p class="footer">&#9670; &nbsp; Design Studio &nbsp; &#9670;</p>
+  </div>
+</body>
+</html>
