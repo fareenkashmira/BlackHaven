@@ -320,4 +320,20 @@
     const dot=document.getElementById('bh-cursor');
     let mx=0,my=0;
     document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-    (function t(){dot.style.left=mx+'px';dot.style.to
+    (function t(){dot.style.left=mx+'px';dot.style.top=my+'px';requestAnimationFrame(t);})();
+    document.querySelectorAll('a,button').forEach(el=>{
+      el.addEventListener('mouseenter',()=>dot.classList.add('hovering'));
+      el.addEventListener('mouseleave',()=>dot.classList.remove('hovering'));
+    });
+    const _mts=document.querySelectorAll('.magnify,nav a,.page-title,.logo-text');
+    document.addEventListener('mousemove',e=>{
+      _mts.forEach(el=>{
+        const r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+        const d=Math.hypot(e.clientX-cx,e.clientY-cy);
+        if(d<120){el.style.transform=`scale(${1+(1-d/120)*0.08})`;el.style.transformOrigin='center';}
+        else el.style.transform='scale(1)';
+      });
+    });
+  </script>
+</body>
+</html>
