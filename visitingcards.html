@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visiting Cards — Black Haven</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0f1e3d;--maroon:#8b0022;--gold:#c9a84c;--gold-light:#e5c97a;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:linear-gradient(160deg,#0a1428 0%,#0f1e3d 45%,#1a0a12 100%);min-height:100vh;color:#fff;}
+
+  nav{position:fixed;top:0;left:0;right:0;padding:1.2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,20,40,0.85);backdrop-filter:blur(16px);border-bottom:0.5px solid rgba(201,168,76,0.2);z-index:100;}
+  .nav-logo{font-family:'Cinzel',serif;font-weight:700;font-size:1rem;color:#fff;text-decoration:none;letter-spacing:0.08em;}
+  .nav-logo span{color:#c9a84c;}
+  .nav-back{font-family:'DM Sans',sans-serif;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(201,168,76,0.6);text-decoration:none;transition:color 0.3s;}
+  .nav-back:hover{color:#c9a84c;}
+
+  .hero{padding:9rem 2rem 3rem;text-align:center;}
+  .hero-ornament{font-size:11px;letter-spacing:0.35em;color:rgba(201,168,76,0.5);text-transform:uppercase;margin-bottom:0.8rem;}
+  .hero h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;color:#fff;letter-spacing:0.06em;margin-bottom:0.5rem;line-height:1.2;}
+  .hero h1 span{color:#c9a84c;}
+  .hero p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:rgba(255,255,255,0.4);letter-spacing:0.02em;}
+  .divider{display:flex;align-items:center;gap:12px;max-width:300px;margin:1.5rem auto 2.5rem;}
+  .divider::before,.divider::after{content:'';flex:1;height:0.5px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4),transparent);}
+  .gem{width:6px;height:6px;background:#c9a84c;transform:rotate(45deg);flex-shrink:0;}
+
+  .cards-section{padding:0 1.5rem 2rem;}
+  .cards-grid{display:flex;flex-direction:column;gap:10px;max-width:460px;margin:0 auto;}
+
+  .card-btn{display:flex;align-items:center;gap:1.2rem;text-decoration:none;border:0.5px solid rgba(201,168,76,0.2);background:rgba(255,255,255,0.03);padding:1rem 1.2rem;border-radius:2px;transition:all 0.3s ease;position:relative;overflow:hidden;}
+  .card-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,#c9a84c,#8b0022);transform:scaleY(0);transition:transform 0.3s ease;transform-origin:bottom;}
+  .card-btn:hover{background:rgba(201,168,76,0.06);border-color:rgba(201,168,76,0.5);}
+  .card-btn:hover::before{transform:scaleY(1);}
+
+  .thumb{width:90px;height:62px;border-radius:2px;flex-shrink:0;position:relative;overflow:hidden;}
+  .thumb::after{content:'';position:absolute;inset:0;border:0.5px solid rgba(255,255,255,0.1);}
+  .thumb-classic{background:linear-gradient(135deg,#0f1e3d,#2e4a82);}
+  .thumb-rose{background:linear-gradient(135deg,#4a1528,#c9607a);}
+  .thumb-midnight{background:linear-gradient(135deg,#0a0a14,#1e1e3c);}
+  .thumb-pearl{background:linear-gradient(135deg,#c8bfb0,#e8e0d5);}
+
+  .thumb-classic::before,.thumb-rose::before,.thumb-midnight::before,.thumb-pearl::before{content:'';position:absolute;bottom:8px;left:10px;right:10px;height:1px;background:rgba(201,168,76,0.4);}
+
+  .card-info{flex:1;}
+  .card-name{font-family:'Cinzel',serif;font-size:0.85rem;font-weight:600;color:#fff;letter-spacing:0.06em;margin-bottom:4px;}
+  .card-tag{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(201,168,76,0.7);}
+
+  .order-arrow{width:32px;height:32px;border:0.5px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:2px;transition:all 0.3s;}
+  .order-arrow svg{width:12px;height:12px;stroke:#c9a84c;fill:none;stroke-width:2;transition:transform 0.3s;}
+  .card-btn:hover .order-arrow{background:rgba(201,168,76,0.15);border-color:#c9a84c;}
+  .card-btn:hover .order-arrow svg{transform:translateX(2px);}
+
+  .cta{margin:2.5rem 1.5rem 4rem;max-width:460px;margin-left:auto;margin-right:auto;}
+  .cta-box{background:rgba(255,255,255,0.03);border:0.5px solid rgba(201,168,76,0.2);border-radius:2px;padding:2rem;text-align:center;position:relative;}
+  .cta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4),transparent);}
+  .cta-title{font-family:'Cinzel',serif;font-size:1rem;font-weight:600;color:#fff;letter-spacing:0.06em;margin-bottom:0.4rem;}
+  .cta-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.9rem;color:rgba(255,255,255,0.4);margin-bottom:1.2rem;}
+  .cta-btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;padding:12px 24px;background:linear-gradient(135deg,#0f1e3d,#1a0a12);border:0.5px solid rgba(201,168,76,0.5);color:#c9a84c;font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;transition:all 0.3s;}
+  .cta-btn:hover{background:linear-gradient(135deg,#c9a84c,#e5c97a);color:#0f1e3d;border-color:#c9a84c;}
+  .cta-btn svg{width:14px;height:14px;fill:currentColor;}
+
+  footer{text-align:center;padding:2rem;font-size:0.65rem;letter-spacing:0.2em;color:rgba(201,168,76,0.2);text-transform:uppercase;border-top:0.5px solid rgba(201,168,76,0.1);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Black<span>Haven</span></a>
+  <a href="portfolio.html" class="nav-back">&#8592; Back</a>
+</nav>
+
+<section class="hero">
+  <p class="hero-ornament">Black Haven</p>
+  <h1>Virtual Visiting <span>Cards</span></h1>
+  <p>Select a design &amp; order instantly via WhatsApp</p>
+  <div class="divider"><div class="gem"></div></div>
+</section>
+
+<section class="cards-section">
+  <div class="cards-grid">
+
+    <a href="https://wa.me/+917011403207?text=Navy%20Classic%20Card" class="card-btn">
+      <div class="thumb thumb-classic"></div>
+      <div class="card-info">
+        <div class="card-name">Signature Navy</div>
+        <div class="card-tag">Most Popular</div>
+      </div>
+      <div class="order-arrow">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
+    <a href="https://wa.me/+917011403207?text=Rose%20Luxe%20Card" class="card-btn">
+      <div class="thumb thumb-rose"></div>
+      <div class="card-info">
+        <div class="card-name">Rose Luxe</div>
+        <div class="card-tag">Elegant</div>
+      </div>
+      <div class="order-arrow">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
+    <a href="https://wa.me/+917011403207?text=Midnight%20Card" class="card-btn">
+      <div class="thumb thumb-midnight"></div>
+      <div class="card-info">
+        <div class="card-name">Midnight Pro</div>
+        <div class="card-tag">Minimal</div>
+      </div>
+      <div class="order-arrow">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
+    <a href="https://wa.me/+917011403207?text=Pearl%20White%20Card" class="card-btn">
+      <div class="thumb thumb-pearl"></div>
+      <div class="card-info">
+        <div class="card-name">Pearl Elite</div>
+        <div class="card-tag">Luxury</div>
+      </div>
+      <div class="order-arrow">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="cta">
+  <div class="cta-box">
+    <p class="cta-title">Need a Custom Design?</p>
+    <p class="cta-sub">Every brand is unique — let's craft yours</p>
+    <a href="https://wa.me/+917011403207" class="cta-btn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Chat on WhatsApp
+    </a>
+  </div>
+</div>
+
+<footer>&#9670; &nbsp; Design Studio &nbsp; &#9670;</footer>
+
+</body>
+</html>
