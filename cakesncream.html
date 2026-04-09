@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oak Tree Café — Noir Gold Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#060606;--maroon:#8b0022;--gold:#c9a84c;--gold-light:#e5c97a;--cream:#f0e8d8;--muted:#7a6a58;--dim:#3a3020;}
+body{background:var(--black);color:var(--cream);font-family:'DM Sans',sans-serif;overflow-x:hidden;scroll-behavior:smooth}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.3}
+nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(6,6,6,.92);border-bottom:.5px solid rgba(201,168,76,.15);backdrop-filter:blur(12px)}
+.nav-logo{font-family:'Cinzel',serif;font-size:12px;color:var(--gold);letter-spacing:4px;text-decoration:none}
+.nav-back{font-size:10px;color:var(--muted);text-decoration:none;letter-spacing:3px;text-transform:uppercase;transition:color .3s}
+.nav-back:hover{color:var(--gold)}
+.hero{padding:120px 2rem 3rem;text-align:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at center top,rgba(139,0,34,.1) 0%,transparent 60%)}
+.hero-lines{position:absolute;inset:0;background-image:linear-gradient(to right,rgba(201,168,76,.022) 1px,transparent 1px),linear-gradient(to bottom,rgba(201,168,76,.022) 1px,transparent 1px);background-size:80px 80px}
+.hero-tag{font-size:8px;color:rgba(201,168,76,.45);letter-spacing:5px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:12px}
+.hero-tag::before,.hero-tag::after{content:'';width:24px;height:.5px;background:var(--gold);opacity:.45}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,6rem);font-weight:300;line-height:.9;color:var(--cream);margin-bottom:16px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:11px;color:var(--muted);letter-spacing:3px;line-height:2}
+.hero-divider{display:flex;align-items:center;gap:12px;max-width:200px;margin:1.5rem auto}
+.hero-divider::before,.hero-divider::after{content:'';flex:1;height:.5px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent)}
+.gem{width:5px;height:5px;background:var(--gold);transform:rotate(45deg)}
+
+/* MENU CARD */
+.menu-wrap{display:flex;justify-content:center;padding:0 1.5rem 5rem}
+.menu{width:100%;max-width:420px;background:#090909;border:.5px solid rgba(201,168,76,.18);position:relative;font-family:'DM Sans',sans-serif}
+.menu::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),var(--maroon),var(--gold),transparent)}
+.menu-inner-border{position:absolute;inset:14px;border:.5px solid rgba(201,168,76,.08);pointer-events:none}
+.cnc{position:absolute;width:12px;height:12px;border-color:var(--gold);border-style:solid;opacity:.6}
+.cnc.tl{top:18px;left:18px;border-width:1px 0 0 1px}
+.cnc.tr{top:18px;right:18px;border-width:1px 1px 0 0}
+.cnc.bl{bottom:18px;left:18px;border-width:0 0 1px 1px}
+.cnc.br{bottom:18px;right:18px;border-width:0 1px 1px 0}
+.menu-head{padding:30px 32px 20px;text-align:center}
+.menu-logo{font-family:'Cinzel',serif;font-size:18px;color:var(--gold);letter-spacing:5px;margin-bottom:4px}
+.menu-tagline{font-size:8px;color:rgba(122,106,88,.65);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px}
+.menu-rule{width:50px;height:.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto}
+.menu-body{padding:8px 32px 28px}
+.menu-cat{display:flex;align-items:center;gap:10px;margin:18px 0 12px}
+.menu-cat-line{flex:1;height:.5px;background:rgba(58,48,32,.8)}
+.menu-cat-text{font-size:7px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;white-space:nowrap}
+.menu-item{display:flex;align-items:baseline;padding:8px 0;border-bottom:.5px solid rgba(26,20,10,.8)}
+.item-name{font-family:'Cormorant Garamond',serif;font-size:14px;color:rgba(240,232,216,.9);font-weight:300;flex:1}
+.item-dots{flex:1;border-bottom:.5px dotted rgba(58,48,32,.6);margin:0 8px 3px;min-width:20px}
+.item-price{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--gold);font-style:italic;white-space:nowrap}
+.menu-footer{text-align:center;padding:16px 32px 22px;font-size:7px;color:rgba(74,64,48,.7);letter-spacing:2px;text-transform:uppercase;border-top:.5px solid rgba(26,20,10,.8);margin-top:4px}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<nav>
+  <a href="menus.html" class="nav-logo">Cakes n Cream</a>
+  <a href="menus.html" class="nav-back">&#8592; Back</a>
+</nav>
+<div class="hero">
+  <div class="hero-bg"></div><div class="hero-lines"></div>
+  <div class="hero-tag">Noir Gold</div>
+  <h1>Cakes<br><em>n<br><em>Cream</em></h1>
+  <p class="hero-sub">Freshly brewed · Handcrafted cakes · Aroma</p>
+  <div class="hero-divider"><div class="gem"></div></div>
+</div>
+<div class="menu-wrap">
+  <div class="menu reveal">
+    <div class="menu-inner-border"></div>
+    <div class="cnc tl"></div><div class="cnc tr"></div><div class="cnc bl"></div><div class="cnc br"></div>
+    <div class="menu-head">
+      <div class="menu-logo">Cakes n Cream</div>
+      <div class="menu-tagline">Cakes &nbsp;·&nbsp; Coffee &nbsp;·&nbsp; Aroma</div>
+      <div class="menu-rule"></div>
+    </div>
+    <div class="menu-body">
+      <div class="menu-cat"><div class="menu-cat-line"></div><div class="menu-cat-text">Drinks</div><div class="menu-cat-line"></div></div>
+      <div class="menu-item"><span class="item-name">Iced Americano</span><span class="item-dots"></span><span class="item-price">$40</span></div>
+      <div class="menu-item"><span class="item-name">Golden Latte</span><span class="item-dots"></span><span class="item-price">$50</span></div>
+      <div class="menu-item"><span class="item-name">Freddo Cappuccino</span><span class="item-dots"></span><span class="item-price">$30</span></div>
+      <div class="menu-item"><span class="item-name">Macchiato</span><span class="item-dots"></span><span class="item-price">$50</span></div>
+      <div class="menu-cat"><div class="menu-cat-line"></div><div class="menu-cat-text">Cakes</div><div class="menu-cat-line"></div></div>
+      <div class="menu-item"><span class="item-name">Doughnuts</span><span class="item-dots"></span><span class="item-price">$20</span></div>
+      <div class="menu-item"><span class="item-name">Crème Brûlée</span><span class="item-dots"></span><span class="item-price">$30</span></div>
+      <div class="menu-item"><span class="item-name">Choco Lava Cake</span><span class="item-dots"></span><span class="item-price">$30</span></div>
+    </div>
+    <div class="menu-footer">cakesncream.co &nbsp;·&nbsp; @cakesncream.official</div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(el=>{
+  new IntersectionObserver(([e])=>{if(e.isIntersecting){e.target.classList.add('visible')}},{threshold:.1}).observe(el);
+});
+</script>
+</body>
+</html>
