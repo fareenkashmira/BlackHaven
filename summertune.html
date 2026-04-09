@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer Tune — Issue 01</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#060606;--maroon:#8b0022;--gold:#c9a84c;--cream:#f0e8d8;--muted:#7a6a58;}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--cream);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.28}
+nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(6,6,6,.92);border-bottom:.5px solid rgba(201,168,76,.15);backdrop-filter:blur(12px)}
+.nav-logo{font-family:'Cinzel',serif;font-size:12px;color:var(--gold);letter-spacing:4px;text-decoration:none}
+.nav-back{font-size:10px;color:var(--muted);text-decoration:none;letter-spacing:3px;text-transform:uppercase;transition:color .3s}
+.nav-back:hover{color:var(--gold)}
+
+/* COVER SPREAD */
+.cover-section{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:56px}
+.cover-left{background:#1c1c1c;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:40px;overflow:hidden;min-height:80vh}
+.cover-bg-grad{position:absolute;inset:0;background:linear-gradient(135deg,#1c1c1c 0%,#2a2a2a 100%)}
+.cover-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.08) 60%)}
+.cover-accent{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),var(--maroon),var(--gold),transparent)}
+.cover-tag{position:absolute;top:24px;right:20px;text-align:right;font-family:'Dancing Script';font-size:14px;color:rgba(255,255,255,.35)}
+.cover-issue{font-size:7px;letter-spacing:5px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:8px;position:relative;z-index:1}
+.cover-title{position:relative;z-index:1;line-height:.92;margin-bottom:16px}
+.ct-s{font-family:'Dancing Script';font-size:54px;color:rgba(255,255,255,.9)}
+.ct-ummer{font-family:'Cinzel';font-size:50px;color:#fff;letter-spacing:6px;display:block;margin-top:-8px}
+.ct-j{font-family:'Dancing Script';font-size:44px;color:rgba(255,255,255,.6);display:block;margin-top:-4px}
+.ct-une{font-family:'Cinzel';font-size:50px;color:#fff;letter-spacing:6px;display:block;margin-top:-8px}
+.cover-quote{display:flex;align-items:flex-start;gap:6px;padding:12px 14px;background:rgba(0,0,0,.38);border-left:2px solid var(--maroon);position:relative;z-index:1}
+.qm{font-family:Georgia;font-size:22px;color:rgba(255,255,255,.35);line-height:.8;flex-shrink:0}
+.qt{font-size:10px;font-weight:500;color:rgba(255,255,255,.72);letter-spacing:1px;line-height:1.6;text-transform:uppercase}
+
+.cover-right{background:#fff;position:relative;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;min-height:80vh}
+.cr-photo{flex:1;background:linear-gradient(135deg,#4a5a8a,#c07080);min-height:200px}
+.cr-body{padding:28px 24px}
+.cr-photo-credit{font-size:7px;letter-spacing:2px;color:#aaa;text-transform:uppercase;font-weight:700;margin-bottom:12px;font-family:'DM Sans',sans-serif}
+.cr-quote-text{font-family:'Dancing Script';font-size:22px;color:#1a1a1a;line-height:1.4}
+
+/* INNER CONTENT */
+.inner-section{display:grid;grid-template-columns:1fr 1fr;min-height:70vh}
+.letter-page{background:#111;padding:40px;display:flex;flex-direction:column}
+.lp-hey{font-family:'Dancing Script';font-size:56px;color:#fff;line-height:.9;margin-bottom:2px}
+.lp-dear{font-family:'Cinzel';font-size:20px;color:#fff;letter-spacing:4px}
+.lp-body{display:flex;gap:16px;margin-top:16px;flex:1}
+.lp-img{width:84px;height:100px;background:linear-gradient(135deg,#3a3a3a,#555);flex-shrink:0;border:.5px solid rgba(255,255,255,.15)}
+.lp-text{font-size:11px;color:rgba(255,255,255,.65);line-height:1.85}
+.lp-sig{font-family:'Dancing Script';font-size:32px;color:#fff;margin-top:16px}
+.lp-role{font-size:8px;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;margin-top:3px}
+
+.article-img-page{background:linear-gradient(160deg,#2a4a2a,#4a6a3a);position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
+.ai-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.05) 50%)}
+.ai-credit{position:absolute;top:14px;left:16px;font-size:7px;letter-spacing:2px;color:rgba(255,255,255,.3);text-transform:uppercase;font-family:'DM Sans',sans-serif}
+.ai-hl{position:relative;z-index:1}
+.ai-i{font-family:'Dancing Script';font-size:26px;color:#fff}
+.ai-n{font-family:'Cinzel';font-size:28px;color:#fff;letter-spacing:4px;line-height:1}
+
+.fashion-page{background:#111;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:28px}
+.fp-top{font-family:'Cinzel';font-size:24px;color:#fff;letter-spacing:5px;display:flex;align-items:center;gap:8px}
+.fp-top-i{font-family:'Dancing Script';font-size:26px}
+.fp-img{width:80%;aspect-ratio:4/3;background:linear-gradient(135deg,#8a2040,#2a1a30);border:.5px solid rgba(255,255,255,.1)}
+.fp-bot{font-family:'Cinzel';font-size:20px;color:#fff;letter-spacing:4px;display:flex;align-items:center;gap:6px}
+
+.article-text-page{background:#fff;padding:32px 22px;display:flex;flex-direction:column}
+.at-kicker{font-size:7px;letter-spacing:3px;color:#888;text-transform:uppercase;margin-bottom:10px;font-family:'DM Sans',sans-serif}
+.at-body{font-family:'Cormorant Garamond',serif;font-size:12px;color:#1a1a1a;line-height:1.9;flex:1}
+.at-credit{font-size:7px;letter-spacing:2px;color:#bbb;text-transform:uppercase;font-family:'DM Sans',sans-serif;margin-top:12px;align-self:flex-end}
+
+/* PAGE LABELS */
+.page-num{font-size:8px;color:rgba(201,168,76,.3);letter-spacing:2px;text-align:center;padding:10px;font-family:'Cinzel',serif}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.cover-section,.inner-section{grid-template-columns:1fr}.cover-left,.cover-right{min-height:50vh}nav{padding:14px 20px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="magazines.html" class="nav-logo">Black Haven</a>
+  <a href="magazines.html" class="nav-back">&#8592; Back</a>
+</nav>
+
+<div class="cover-section reveal">
+  <div class="cover-left">
+    <div class="cover-bg-grad"></div>
+    <div class="cover-overlay"></div>
+    <div class="cover-accent"></div>
+    <div class="cover-tag">featuring<br>Shawn Mendes</div>
+    <div class="cover-issue">Issue 01 &nbsp;·&nbsp; Summer Edition</div>
+    <div class="cover-title">
+      <span class="ct-s">S</span>
+      <span class="ct-ummer">UMMER</span>
+      <span class="ct-j">J</span>
+      <span class="ct-une">UNE</span>
+    </div>
+    <div class="cover-quote">
+      <div class="qm">"</div>
+      <div class="qt">The most selfless thing you can do is take care of yourself - Shawn Mendes</div>
+      <div class="qm" style="align-self:flex-end">"</div>
+    </div>
+  </div>
+  <div class="cover-right">
+    <div class="cr-photo"></div>
+    <div class="cr-body">
+      <div class="cr-photo-credit">Photography — Francois Mercer, Jin Ae Soo</div>
+      <div class="cr-quote-text">"Sometimes the fog will clear up — but only after you let it."</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-num reveal">01 &nbsp;—&nbsp; Cover</div>
+
+<div class="inner-section reveal">
+  <div class="letter-page">
+    <div class="lp-hey">Hey,</div>
+    <div class="lp-dear">DEAR READERS</div>
+    <div class="lp-body">
+      <div class="lp-img"></div>
+      <div class="lp-text">In this edition we explore the journey of our cover star — their fashion choices, struggles and thoughts on life and career. We look into their advice to our readers, exclusively on Summer Tune.</div>
+    </div>
+    <div class="lp-sig">Fareen Kashmira</div>
+    <div class="lp-role">Editor-in-Chief</div>
+  </div>
+  <div class="article-img-page">
+    <div class="ai-overlay"></div>
+    <div class="ai-credit">Photography by Jackson Davis</div>
+    <div class="ai-hl">
+      <div class="ai-i">I</div>
+      <div class="ai-n">NFLUENCING THE<br>NEW TRENDS</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-num reveal">02 &nbsp;—&nbsp; From the Editor</div>
+
+<div class="inner-section reveal">
+  <div class="fashion-page">
+    <div class="fp-top"><span class="fp-top-i">T</span>HE FUTURE OF</div>
+    <div class="fp-img"></div>
+    <div class="fp-bot"><span style="font-family:'Dancing Script';font-size:26px">F</span>ASHION IS <span style="font-family:'Dancing Script';font-size:26px">H</span>ERE</div>
+  </div>
+  <div class="article-text-page">
+    <div class="at-kicker">Putting a stop to fast fashion</div>
+    <div class="at-body">
+      <p style="margin-bottom:12px">A short intro or kicker of the article goes here. This part acts as a bridge between the headline and the article itself.</p>
+      <p style="margin-bottom:12px">Our cover star gives readers something real — not just hits delivered with aplomb, but a genuine perspective on what fashion means when you're living under a spotlight. What we need to talk about is the ability to make every person in a room feel like the only one there.</p>
+      <p>From the moment they step on stage to the finale — all the right notes, all the right clothes. The look is the statement. The statement is the person.</p>
+    </div>
+    <div class="at-credit">Photography by Aaron Loeb</div>
+  </div>
+</div>
+
+<div class="page-num reveal">03 &nbsp;—&nbsp; Feature</div>
+
+<script>
+document.querySelectorAll('.reveal').forEach(el=>{
+  new IntersectionObserver(([e])=>{if(e.isIntersecting){e.target.classList.add('visible')}},{threshold:.06}).observe(el);
+});
+</script>
+</body>
+</html>
