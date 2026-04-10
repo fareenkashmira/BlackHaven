@@ -37,9 +37,9 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
 @keyframes gf{0%,100%{transform:translateY(0) scale(1);opacity:.6}50%{transform:translateY(-9px) scale(1.4);opacity:1}}
 
 /* watermark logo on white pages */
-.wm{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:clamp(40px,7vw,80px);color:rgba(107,15,26,0.05);font-weight:700;letter-spacing:10px;pointer-events:none;white-space:nowrap;z-index:1;user-select:none}
+.wm{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:1;user-select:none;opacity:0.05;width:clamp(160px,28vw,320px)}
 /* watermark on maroon pages */
-.pm-wm{position:absolute;bottom:-8px;right:-4px;font-family:'Cinzel',serif;font-size:88px;color:rgba(255,255,255,0.04);font-weight:700;pointer-events:none;z-index:0;line-height:1;user-select:none}
+.pm-wm{position:absolute;bottom:-8px;right:-4px;pointer-events:none;z-index:0;user-select:none;opacity:0.07;width:clamp(100px,18vw,180px);filter:brightness(0) invert(1)}
 
 .nav-bar{display:flex;justify-content:space-between;align-items:center;padding:13px 32px;border-bottom:.5px solid var(--dim);background:var(--white);flex-shrink:0;position:relative;z-index:10}
 .nav-logo{font-family:'Cinzel',serif;font-size:13px;color:var(--maroon);letter-spacing:4px}
@@ -97,8 +97,33 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
 .product-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
 .product-card{border:.5px solid var(--dim);padding:12px;background:var(--white);position:relative}
 .product-accent{position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,var(--pink-mid),var(--gold),var(--maroon))}
-.product-img{width:100%;height:60px;background:linear-gradient(135deg,rgba(249,198,208,.3),rgba(201,168,76,.1));display:flex;align-items:center;justify-content:center;margin-bottom:8px}
-.product-img-lbl{font-family:'Cinzel',serif;font-size:22px;color:rgba(107,15,26,.14);font-weight:700}
+
+/* pixie-frame image wrapper */
+.product-img{width:100%;height:110px;position:relative;margin-bottom:10px;overflow:visible}
+.product-img-inner{
+  width:100%;height:100%;
+  background:linear-gradient(135deg,rgba(249,198,208,.35),rgba(201,168,76,.12),rgba(249,198,208,.2));
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  -webkit-mask-image:radial-gradient(ellipse 80% 75% at 50% 50%,black 38%,rgba(0,0,0,.82) 55%,rgba(0,0,0,.45) 72%,transparent 100%);
+  mask-image:radial-gradient(ellipse 80% 75% at 50% 50%,black 38%,rgba(0,0,0,.82) 55%,rgba(0,0,0,.45) 72%,transparent 100%);
+}
+.product-img-inner img{width:100%;height:100%;object-fit:cover;display:block}
+.product-img-lbl{font-family:'Cinzel',serif;font-size:28px;color:rgba(107,15,26,.13);font-weight:700;position:absolute}
+
+/* pixie glitter frame */
+.pixie-frame{position:absolute;inset:-6px;pointer-events:none;z-index:4}
+.px{position:absolute;width:4px;height:4px;pointer-events:none}
+.px::before,.px::after{content:'';position:absolute;background:var(--gold);border-radius:1px}
+.px::before{width:100%;height:1.5px;top:50%;left:0;transform:translateY(-50%)}
+.px::after{width:1.5px;height:100%;left:50%;top:0;transform:translateX(-50%)}
+@keyframes pixieTwinkle{
+  0%,100%{opacity:.2;transform:scale(.5) rotate(0deg)}
+  25%{opacity:1;transform:scale(1.3) rotate(45deg)}
+  50%{opacity:.5;transform:scale(.8) rotate(90deg)}
+  75%{opacity:.9;transform:scale(1.1) rotate(135deg)}
+}
+.px{animation:pixieTwinkle linear infinite}
 .product-tag{font-family:'Outfit',sans-serif;font-size:7px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
 .product-name{font-family:'Big Shoulders Display',sans-serif;font-size:13px;color:var(--black);margin-bottom:4px;letter-spacing:1px}
 .product-desc{font-family:'Outfit',sans-serif;font-size:8.5px;color:var(--text-muted);line-height:1.7}
@@ -128,7 +153,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
 .hi-desc{font-family:'Outfit',sans-serif;font-size:8.5px;color:var(--text-muted);line-height:1.6}
 
 .back-cover-page{background:var(--black);display:flex;flex-direction:column;justify-content:space-between;padding:48px 40px;height:100%;position:relative;overflow:hidden}
-.bc-wm{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cinzel',serif;font-size:clamp(50px,10vw,110px);color:rgba(201,168,76,0.04);font-weight:700;letter-spacing:14px;white-space:nowrap;pointer-events:none;user-select:none}
+.bc-wm{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;user-select:none;opacity:0.06;width:clamp(200px,40vw,420px);filter:brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(5deg)}
 
 .mx{display:inline-block;transition:transform .15s ease}
 .mx:hover{transform:scale(1.055)}
@@ -145,7 +170,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
   <div class="nav-bar"><span class="nav-logo">BLACK HAVEN</span><span class="nav-issue">Issue 01 · Spring 2025</span></div>
   <div class="page-content two-col" style="position:relative">
     <div class="glitter-layer" id="gl0"></div>
-    <div class="wm">BLACK HAVEN</div>
+    <img src="BH.png" class="wm" alt="">
     <div class="cover-left-panel">
       <div class="cover-top-bar"></div>
       <div><span class="cover-issue-tag mx">Issue 01 &nbsp;·&nbsp; Spring 2025</span></div>
@@ -178,7 +203,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
   <div class="page-content two-col">
     <div class="glitter-layer" id="gl1"></div>
     <div class="page-maroon">
-      <div class="pm-wm">BH.</div>
+      <img src="BH.png" class="pm-wm" alt="">
       <div class="pm-cat mx">Our Purpose</div>
       <div class="pm-quote mx">"Black Haven exists for the woman who has always known who she is — and dresses accordingly."</div>
       <div class="pm-attr mx">— Founding Statement, 2024</div>
@@ -186,7 +211,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
       <div style="font-family:'Outfit',sans-serif;font-size:8.5px;color:rgba(255,255,255,.4);line-height:1.8;margin-top:12px" class="mx">A journal for the modest, the intentional, and the quietly powerful.</div>
     </div>
     <div class="page-pad">
-      <div class="wm">BLACK HAVEN</div>
+      <img src="BH.png" class="wm" alt="">
       <div class="pg-cat mx">Objective</div>
       <div class="pg-heading mx">Why Black Haven Exists</div>
       <div class="pg-rule"></div>
@@ -210,7 +235,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
   <div class="page-content two-col">
     <div class="glitter-layer" id="gl2"></div>
     <div class="page-pad" style="background:rgba(249,198,208,.1);border-right:.5px solid rgba(249,198,208,.5)">
-      <div class="wm">BH.</div>
+      <img src="BH.png" class="wm" alt="">
       <div class="pg-cat mx">This Issue</div>
       <div class="pg-heading mx">Five Highlights</div>
       <div class="pg-rule"></div><div class="ps"></div>
@@ -247,14 +272,14 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
   <div class="page-content two-col">
     <div class="glitter-layer" id="gl3"></div>
     <div class="page-maroon">
-      <div class="pm-wm">ESSAY</div>
+      <img src="BH.png" class="pm-wm" alt="">
       <div class="pm-cat mx">Cover Essay</div>
       <div class="pm-quote mx">"She dressed not to be seen — but to be felt."</div>
       <div class="pm-attr mx">— Black Haven Journal, Issue 01</div>
       <div style="margin-top:20px"><div class="ps"></div><div style="font-family:'Outfit',sans-serif;font-size:8px;color:rgba(249,198,208,.5);line-height:1.8;margin-top:10px" class="mx">There is a silence that speaks. In modest fashion, the choice of dark fabric is rarely about erasure — it is about drawing the eye inward.</div></div>
     </div>
     <div class="page-pad">
-      <div class="wm">BLACK HAVEN</div>
+      <img src="BH.png" class="wm" alt="">
       <div class="pg-cat mx">Essay · Identity</div>
       <div class="pg-heading mx">Modesty Is Not a Limit —</div>
       <div class="pg-sub mx">It Is a Lens</div>
@@ -277,7 +302,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
   <div class="nav-bar"><span class="nav-logo">BLACK HAVEN</span><span class="nav-issue">Essay — Pg 05</span></div>
   <div class="page-content two-col">
     <div class="page-pad" style="border-right:.5px solid var(--dim)">
-      <div class="wm">BH.</div>
+      <img src="BH.png" class="wm" alt="">
       <div class="pg-cat mx">Essay · Continued</div>
       <div class="pg-heading mx" style="font-size:17px">On Wearing Black Like a Language</div>
       <div class="pg-rule"></div>
@@ -312,15 +337,27 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
   <div class="page-content two-col">
     <div class="glitter-layer" id="gl5"></div>
     <div class="page-pad" style="border-right:.5px solid var(--dim)">
-      <div class="wm">BH.</div>
+      <img src="BH.png" class="wm" alt="">
       <div class="pg-cat mx">Spring Collection 2025</div>
       <div class="pg-heading mx">Four Silhouettes</div>
       <div class="pg-rule"></div>
       <div class="pg-tagline mx">"Each one rooted in function, each elevated by detail."</div>
       <div class="ps"></div>
       <div class="product-grid">
-        <div class="product-card"><div class="product-accent"></div><div class="product-img"><span class="product-img-lbl">R</span></div><div class="product-tag">Open Front</div><div class="product-name mx">The Rania</div><div class="product-desc mx">Flowing open-front silhouette in midnight crepe. Minimal embroidery at cuff.</div><div class="product-price mx">SAR 480</div></div>
-        <div class="product-card"><div class="product-accent"></div><div class="product-img"><span class="product-img-lbl">S</span></div><div class="product-tag">Structured</div><div class="product-name mx">The Safa</div><div class="product-desc mx">Tailored structure with a maroon inner lining. Power dressing, quietly.</div><div class="product-price mx">SAR 560</div></div>
+        <div class="product-card"><div class="product-accent"></div><div class="product-img">
+      <div class="pixie-frame"><div class="px" style="left:-0.09999999999999964%;top:5.8%;width:5.4px;height:5.4px;animation-duration:1.49s;animation-delay:-0.43s"></div><div class="px" style="left:25.0%;top:-5.7%;width:5.3px;height:5.3px;animation-duration:1.2s;animation-delay:-1.47s"></div><div class="px" style="left:50.4%;top:4.8%;width:3.8px;height:3.8px;animation-duration:1.77s;animation-delay:-1.52s"></div><div class="px" style="left:75.3%;top:3.7%;width:4.7px;height:4.7px;animation-duration:1.69s;animation-delay:-2.91s"></div><div class="px" style="left:95.0%;top:2.4%;width:4.2px;height:4.2px;animation-duration:2.06s;animation-delay:-2.44s"></div><div class="px" style="left:10.4%;top:95.2%;width:4.0px;height:4.0px;animation-duration:2.1s;animation-delay:-2.37s"></div><div class="px" style="left:25.4%;top:99.8%;width:5.1px;height:5.1px;animation-duration:2.34s;animation-delay:-2.04s"></div><div class="px" style="left:43.9%;top:99.0%;width:4.1px;height:4.1px;animation-duration:1.91s;animation-delay:-0.47s"></div><div class="px" style="left:69.5%;top:101.3%;width:4.7px;height:4.7px;animation-duration:1.81s;animation-delay:-2.74s"></div><div class="px" style="left:94.5%;top:100.1%;width:3.9px;height:3.9px;animation-duration:2.23s;animation-delay:-1.3s"></div><div class="px" style="left:5.9%;top:8.8%;width:4.7px;height:4.7px;animation-duration:2.65s;animation-delay:-1.75s"></div><div class="px" style="left:-5.0%;top:23.7%;width:4.7px;height:4.7px;animation-duration:2.26s;animation-delay:-0.3s"></div><div class="px" style="left:-3.7%;top:44.1%;width:4.1px;height:4.1px;animation-duration:1.24s;animation-delay:-0.92s"></div><div class="px" style="left:-4.3%;top:69.1%;width:5.2px;height:5.2px;animation-duration:1.68s;animation-delay:-2.53s"></div><div class="px" style="left:-2.6%;top:80.9%;width:3.6px;height:3.6px;animation-duration:2.74s;animation-delay:-0.37s"></div><div class="px" style="left:102.6%;top:1.6%;width:4.8px;height:4.8px;animation-duration:2.74s;animation-delay:-0.26s"></div><div class="px" style="left:104.9%;top:20.1%;width:4.7px;height:4.7px;animation-duration:1.68s;animation-delay:-0.98s"></div><div class="px" style="left:102.4%;top:46.4%;width:4.6px;height:4.6px;animation-duration:1.54s;animation-delay:-1.05s"></div><div class="px" style="left:97.5%;top:60.7%;width:5.3px;height:5.3px;animation-duration:1.21s;animation-delay:-1.47s"></div><div class="px" style="left:96.2%;top:90.0%;width:5.0px;height:5.0px;animation-duration:1.4s;animation-delay:-1.45s"></div></div>
+      <div class="product-img-inner">
+        <img src="images/product-r.jpg" alt="Product R" onerror="this.style.display='none'">
+        <span class="product-img-lbl">R</span>
+      </div>
+    </div><div class="product-tag">Open Front</div><div class="product-name mx">The Rania</div><div class="product-desc mx">Flowing open-front silhouette in midnight crepe. Minimal embroidery at cuff.</div><div class="product-price mx">SAR 480</div></div>
+        <div class="product-card"><div class="product-accent"></div><div class="product-img">
+      <div class="pixie-frame"><div class="px" style="left:6.9%;top:1.4%;width:4.6px;height:4.6px;animation-duration:1.23s;animation-delay:-1.49s"></div><div class="px" style="left:26.7%;top:0.7%;width:4.1px;height:4.1px;animation-duration:2.41s;animation-delay:-2.57s"></div><div class="px" style="left:54.4%;top:-2.7%;width:3.6px;height:3.6px;animation-duration:1.76s;animation-delay:-0.27s"></div><div class="px" style="left:68.8%;top:-4.1%;width:4.5px;height:4.5px;animation-duration:2.12s;animation-delay:-1.14s"></div><div class="px" style="left:93.9%;top:-5.2%;width:3.6px;height:3.6px;animation-duration:1.5s;animation-delay:-0.15s"></div><div class="px" style="left:9.6%;top:97.2%;width:4.7px;height:4.7px;animation-duration:2.69s;animation-delay:-1.95s"></div><div class="px" style="left:26.0%;top:95.9%;width:5.4px;height:5.4px;animation-duration:1.71s;animation-delay:-0.57s"></div><div class="px" style="left:50.6%;top:97.0%;width:4.4px;height:4.4px;animation-duration:1.93s;animation-delay:-0.93s"></div><div class="px" style="left:68.6%;top:103.5%;width:3.1px;height:3.1px;animation-duration:2.7s;animation-delay:-2.46s"></div><div class="px" style="left:92.2%;top:101.6%;width:4.8px;height:4.8px;animation-duration:2.15s;animation-delay:-0.16s"></div><div class="px" style="left:-4.8%;top:-0.40000000000000036%;width:4.1px;height:4.1px;animation-duration:1.71s;animation-delay:-0.46s"></div><div class="px" style="left:1.1%;top:24.6%;width:3.1px;height:3.1px;animation-duration:1.57s;animation-delay:-0.9s"></div><div class="px" style="left:-2.8%;top:47.4%;width:4.3px;height:4.3px;animation-duration:2.66s;animation-delay:-2.43s"></div><div class="px" style="left:5.3%;top:59.6%;width:4.5px;height:4.5px;animation-duration:2.35s;animation-delay:-1.43s"></div><div class="px" style="left:1.1%;top:84.3%;width:3.2px;height:3.2px;animation-duration:2.21s;animation-delay:-1.88s"></div><div class="px" style="left:98.5%;top:2.8%;width:3.4px;height:3.4px;animation-duration:2.09s;animation-delay:-2.7s"></div><div class="px" style="left:104.0%;top:20.1%;width:3.1px;height:3.1px;animation-duration:2.67s;animation-delay:-0.69s"></div><div class="px" style="left:104.8%;top:50.4%;width:4.6px;height:4.6px;animation-duration:1.4s;animation-delay:-1.34s"></div><div class="px" style="left:100.1%;top:67.6%;width:3.1px;height:3.1px;animation-duration:1.79s;animation-delay:-0.5s"></div><div class="px" style="left:97.1%;top:84.9%;width:3.3px;height:3.3px;animation-duration:2.5s;animation-delay:-2.34s"></div></div>
+      <div class="product-img-inner">
+        <img src="images/product-s.jpg" alt="Product S" onerror="this.style.display='none'">
+        <span class="product-img-lbl">S</span>
+      </div>
+    </div><div class="product-tag">Structured</div><div class="product-name mx">The Safa</div><div class="product-desc mx">Tailored structure with a maroon inner lining. Power dressing, quietly.</div><div class="product-price mx">SAR 560</div></div>
       </div>
       <div class="pg-num-l">06</div>
     </div>
@@ -331,8 +368,20 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
       <div class="pg-tagline mx">"Where every seam is a sentence."</div>
       <div class="ps"></div>
       <div class="product-grid">
-        <div class="product-card"><div class="product-accent"></div><div class="product-img"><span class="product-img-lbl">M</span></div><div class="product-tag">Draped</div><div class="product-name mx">The Malak</div><div class="product-desc mx">Soft draped layers in ivory and blush. Embellished shoulder detail.</div><div class="product-price mx">SAR 620</div></div>
-        <div class="product-card"><div class="product-accent"></div><div class="product-img"><span class="product-img-lbl">H</span></div><div class="product-tag">Minimal</div><div class="product-name mx">The Huda</div><div class="product-desc mx">Clean lines in black wool-blend. The everyday abaya, perfected.</div><div class="product-price mx">SAR 390</div></div>
+        <div class="product-card"><div class="product-accent"></div><div class="product-img">
+      <div class="pixie-frame"><div class="px" style="left:5.5%;top:-4.7%;width:4.1px;height:4.1px;animation-duration:1.34s;animation-delay:-2.4s"></div><div class="px" style="left:30.3%;top:0.6%;width:3.3px;height:3.3px;animation-duration:2.45s;animation-delay:-0.98s"></div><div class="px" style="left:54.2%;top:-5.3%;width:5.1px;height:5.1px;animation-duration:2.05s;animation-delay:-0.72s"></div><div class="px" style="left:76.7%;top:3.0%;width:5.4px;height:5.4px;animation-duration:1.53s;animation-delay:-2.47s"></div><div class="px" style="left:93.4%;top:-3.4%;width:4.2px;height:4.2px;animation-duration:1.51s;animation-delay:-0.35s"></div><div class="px" style="left:7.9%;top:103.2%;width:4.0px;height:4.0px;animation-duration:1.33s;animation-delay:-1.43s"></div><div class="px" style="left:32.4%;top:94.4%;width:4.2px;height:4.2px;animation-duration:1.52s;animation-delay:-1.67s"></div><div class="px" style="left:43.5%;top:98.3%;width:5.5px;height:5.5px;animation-duration:2.1s;animation-delay:-1.83s"></div><div class="px" style="left:66.4%;top:105.8%;width:5.3px;height:5.3px;animation-duration:1.9s;animation-delay:-0.44s"></div><div class="px" style="left:95.3%;top:94.7%;width:4.2px;height:4.2px;animation-duration:2.33s;animation-delay:-1.89s"></div><div class="px" style="left:2.3%;top:0.09999999999999964%;width:3.7px;height:3.7px;animation-duration:1.32s;animation-delay:-1.5s"></div><div class="px" style="left:-4.9%;top:29.1%;width:5.3px;height:5.3px;animation-duration:2.54s;animation-delay:-2.55s"></div><div class="px" style="left:5.1%;top:48.0%;width:4.4px;height:4.4px;animation-duration:2.77s;animation-delay:-0.09s"></div><div class="px" style="left:-5.3%;top:64.8%;width:4.9px;height:4.9px;animation-duration:2.38s;animation-delay:-2.87s"></div><div class="px" style="left:3.1%;top:79.3%;width:3.0px;height:3.0px;animation-duration:2.39s;animation-delay:-0.52s"></div><div class="px" style="left:95.1%;top:10.1%;width:3.3px;height:3.3px;animation-duration:2.56s;animation-delay:-2.44s"></div><div class="px" style="left:98.7%;top:24.7%;width:5.2px;height:5.2px;animation-duration:1.35s;animation-delay:-1.52s"></div><div class="px" style="left:95.6%;top:42.1%;width:4.9px;height:4.9px;animation-duration:1.94s;animation-delay:-2.51s"></div><div class="px" style="left:95.0%;top:61.0%;width:3.1px;height:3.1px;animation-duration:1.33s;animation-delay:-0.55s"></div><div class="px" style="left:105.5%;top:81.8%;width:4.3px;height:4.3px;animation-duration:2.45s;animation-delay:-0.96s"></div></div>
+      <div class="product-img-inner">
+        <img src="images/product-m.jpg" alt="Product M" onerror="this.style.display='none'">
+        <span class="product-img-lbl">M</span>
+      </div>
+    </div><div class="product-tag">Draped</div><div class="product-name mx">The Malak</div><div class="product-desc mx">Soft draped layers in ivory and blush. Embellished shoulder detail.</div><div class="product-price mx">SAR 620</div></div>
+        <div class="product-card"><div class="product-accent"></div><div class="product-img">
+      <div class="pixie-frame"><div class="px" style="left:9.2%;top:-4.2%;width:3.2px;height:3.2px;animation-duration:1.71s;animation-delay:-0.22s"></div><div class="px" style="left:26.3%;top:-5.5%;width:4.7px;height:4.7px;animation-duration:1.23s;animation-delay:-1.78s"></div><div class="px" style="left:48.9%;top:4.5%;width:5.3px;height:5.3px;animation-duration:1.87s;animation-delay:-2.97s"></div><div class="px" style="left:67.8%;top:3.4%;width:4.2px;height:4.2px;animation-duration:1.61s;animation-delay:-1.03s"></div><div class="px" style="left:98.4%;top:-5.0%;width:4.1px;height:4.1px;animation-duration:1.76s;animation-delay:-1.63s"></div><div class="px" style="left:10.8%;top:94.7%;width:3.8px;height:3.8px;animation-duration:1.55s;animation-delay:-1.12s"></div><div class="px" style="left:24.7%;top:98.3%;width:5.5px;height:5.5px;animation-duration:2.56s;animation-delay:-2.22s"></div><div class="px" style="left:45.3%;top:103.9%;width:3.7px;height:3.7px;animation-duration:2.22s;animation-delay:-2.06s"></div><div class="px" style="left:75.5%;top:95.8%;width:3.3px;height:3.3px;animation-duration:1.76s;animation-delay:-1.8s"></div><div class="px" style="left:98.8%;top:94.2%;width:4.6px;height:4.6px;animation-duration:2.0s;animation-delay:-2.93s"></div><div class="px" style="left:-3.6%;top:5.9%;width:3.8px;height:3.8px;animation-duration:1.5s;animation-delay:-2.11s"></div><div class="px" style="left:1.5%;top:27.1%;width:4.9px;height:4.9px;animation-duration:2.71s;animation-delay:-1.03s"></div><div class="px" style="left:-4.5%;top:49.0%;width:3.6px;height:3.6px;animation-duration:2.65s;animation-delay:-1.14s"></div><div class="px" style="left:1.1%;top:68.7%;width:4.9px;height:4.9px;animation-duration:2.11s;animation-delay:-1.9s"></div><div class="px" style="left:0.4%;top:85.0%;width:3.4px;height:3.4px;animation-duration:1.45s;animation-delay:-2.08s"></div><div class="px" style="left:104.6%;top:6.1%;width:4.9px;height:4.9px;animation-duration:2.73s;animation-delay:-0.67s"></div><div class="px" style="left:105.6%;top:27.4%;width:3.8px;height:3.8px;animation-duration:1.55s;animation-delay:-2.43s"></div><div class="px" style="left:99.8%;top:41.1%;width:3.7px;height:3.7px;animation-duration:1.29s;animation-delay:-1.34s"></div><div class="px" style="left:104.3%;top:67.0%;width:3.4px;height:3.4px;animation-duration:1.87s;animation-delay:-2.32s"></div><div class="px" style="left:100.3%;top:83.9%;width:5.0px;height:5.0px;animation-duration:1.8s;animation-delay:-0.27s"></div></div>
+      <div class="product-img-inner">
+        <img src="images/product-h.jpg" alt="Product H" onerror="this.style.display='none'">
+        <span class="product-img-lbl">H</span>
+      </div>
+    </div><div class="product-tag">Minimal</div><div class="product-name mx">The Huda</div><div class="product-desc mx">Clean lines in black wool-blend. The everyday abaya, perfected.</div><div class="product-price mx">SAR 390</div></div>
       </div>
       <div style="margin-top:auto;border-top:.5px solid var(--dim);padding-top:8px"><div style="font-family:'Outfit',sans-serif;font-size:8px;color:var(--text-muted)" class="mx">Available at blackhaven.store · Free shipping on orders above SAR 300</div></div>
       <div class="pg-num">07</div>
@@ -346,7 +395,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
   <div class="page-content two-col">
     <div class="glitter-layer" id="gl6"></div>
     <div class="page-maroon">
-      <div class="pm-wm">NOOR</div>
+      <img src="BH.png" class="pm-wm" alt="">
       <div class="pm-cat mx">Feature Story</div>
       <div class="pm-quote mx">"My grandmother's needle. My mother's patience. My hands. That is the whole story."</div>
       <div class="pm-attr mx">— Noor Al-Rashidi</div>
@@ -354,7 +403,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
       <div class="ps" style="margin-top:14px"></div>
     </div>
     <div class="page-pad">
-      <div class="wm">BLACK HAVEN</div>
+      <img src="BH.png" class="wm" alt="">
       <div class="pg-cat mx">Story · Craft</div>
       <div class="pg-heading mx">The Woman Behind the Abaya</div>
       <div class="pg-rule"></div>
@@ -376,7 +425,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
   <div class="nav-bar"><span class="nav-logo">BLACK HAVEN</span><span class="nav-issue">Story — Pg 09</span></div>
   <div class="page-content two-col">
     <div class="page-pad" style="background:rgba(249,198,208,.07);border-right:.5px solid rgba(249,198,208,.4)">
-      <div class="wm">BH.</div>
+      <img src="BH.png" class="wm" alt="">
       <div class="pg-cat mx">Story · Continued</div>
       <div class="pg-heading mx" style="font-size:16px">The Studio at the Bosphorus</div>
       <div class="pg-rule"></div>
@@ -409,14 +458,14 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
   <div class="page-content two-col">
     <div class="glitter-layer" id="gl8"></div>
     <div class="page-maroon">
-      <div class="pm-wm">Q&amp;A</div>
+      <img src="BH.png" class="pm-wm" alt="">
       <div class="pm-cat mx">In Conversation</div>
       <div class="pm-quote mx">"I did not start a brand. I started a conversation that the fashion industry was refusing to have."</div>
       <div class="pm-attr mx">— Sara Al-Muzaini, Founder</div>
       <div style="margin-top:18px;font-family:'Outfit',sans-serif;font-size:8px;color:rgba(249,198,208,.45);line-height:1.8" class="mx">Sara Al-Muzaini, 34. Founder &amp; Creative Director. Former architect. Now building spaces between cloth and identity.</div>
     </div>
     <div class="page-pad">
-      <div class="wm">BLACK HAVEN</div>
+      <img src="BH.png" class="wm" alt="">
       <div class="pg-cat mx">Q&amp;A · Founder</div>
       <div class="pg-heading mx">Sara Al-Muzaini</div>
       <div class="pg-rule"></div>
@@ -437,7 +486,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
   <div class="nav-bar"><span class="nav-logo">BLACK HAVEN</span><span class="nav-issue">Q&amp;A — Pg 11</span></div>
   <div class="page-content two-col">
     <div class="page-pad" style="background:rgba(249,198,208,.08);border-right:.5px solid rgba(249,198,208,.4)">
-      <div class="wm">BH.</div>
+      <img src="BH.png" class="wm" alt="">
       <div class="pg-cat mx">Q&amp;A · Continued</div>
       <div class="pg-heading mx" style="font-size:16px">More from Sara</div>
       <div class="pg-rule"></div><div class="ps"></div>
@@ -457,7 +506,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
         <div class="pg-blockquote mx">"Black Haven gave my daughter language for what she already believed. She wore her abaya to school the next day with her head high."<br><span style="font-style:normal;color:var(--text-muted)">— Reader, Manchester</span></div><br>
         <div class="pg-blockquote mx">"I have read every fashion journal there is. None of them made me feel seen. This one did."<br><span style="font-style:normal;color:var(--text-muted)">— Reader, Jakarta</span></div>
       </div>
-      <div style="margin-top:auto;border-top:.5px solid var(--dim);padding-top:8px;font-family:'Outfit',sans-serif;font-size:8px;color:var(--text-muted)" class="mx">Submit your letter: journal@blackhaven.store</div>
+      <div style="margin-top:auto;border-top:.5px solid var(--dim);padding-top:8px;font-family:'Outfit',sans-serif;font-size:8px;color:var(--text-muted)" class="mx">Submit your letter: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="046e6b71766a656844666865676f6c6572616a2a77706b7661">[email&#160;protected]</a></div>
       <div class="pg-num">11</div>
     </div>
   </div>
@@ -469,7 +518,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
   <div class="page-content two-col">
     <div class="glitter-layer" id="gl10"></div>
     <div class="page-pad" style="border-right:.5px solid var(--dim)">
-      <div class="wm">BH.</div>
+      <img src="BH.png" class="wm" alt="">
       <div class="pg-cat mx">Authors</div>
       <div class="pg-heading mx">The People Behind This Issue</div>
       <div class="pg-rule"></div><div class="ps"></div>
@@ -508,7 +557,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
   <div class="page-content full-col">
     <div class="glitter-layer" id="gl11"></div>
     <div class="back-cover-page">
-      <div class="bc-wm">BLACK HAVEN</div>
+      <img src="BH.png" class="bc-wm" alt="">
       <div style="text-align:center;padding-bottom:18px;border-bottom:.5px solid rgba(201,168,76,.1)">
         <div style="font-family:'Outfit',sans-serif;font-size:7px;color:rgba(201,168,76,.3);letter-spacing:4px;text-transform:uppercase" class="mx">Issue 01 · Spring 2025</div>
       </div>
@@ -538,7 +587,7 @@ body{background:#f5f0eb;font-family:'Outfit',sans-serif}
   <button class="flip-btn" id="nextBtn" onclick="flip(1)">Next →</button>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var cur=0,total=12,busy=false;
 var pages=[].slice.call(document.querySelectorAll('.page'));
 
@@ -607,11 +656,4 @@ function mkG(id){
     var del=(-Math.random()*3).toFixed(2);
     var op=(0.35+Math.random()*0.55).toFixed(2);
     var col=c[Math.floor(Math.random()*c.length)];
-    d.style.cssText='width:'+s+'px;height:'+s+'px;background:'+col+';left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*100).toFixed(1)+'%;animation-duration:'+dur+'s;animation-delay:'+del+'s;opacity:'+op;
-    el.appendChild(d);
-  }
-}
-['gl0','gl1','gl2','gl3','gl5','gl6','gl8','gl10','gl11'].forEach(mkG);
-</script>
-</body>
-</html>
+    d.style.cssText='width:'+s+'px;height:'+s+'px;background:'+col+';left:'+(Math.random()*100).toFixed(1)+'%
