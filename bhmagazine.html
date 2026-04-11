@@ -124,8 +124,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--black);cursor:
   padding:0 24px;gap:0;
   overflow:hidden;
 }
-.shelf-top{height:54%;padding-top:14px}
-.shelf-bottom{height:46%;padding-top:14px}
+.shelf-top{height:54%}
+.shelf-bottom{height:46%}
 
 /* shelf surface */
 .shelf-surface{
@@ -250,10 +250,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--black);cursor:
 }
 /* top of book */
 .book-top{
-  position:absolute;top:-5px;left:1px;right:1px;height:5px;
+  position:absolute;top:0;left:1px;right:1px;height:5px;
   background:linear-gradient(90deg,#e8e0d0,#f5f0e8,#d8d0c0);
-  border-radius:0 0 0 0;
-  box-shadow:0 -1px 3px rgba(0,0,0,.3);
+  border-radius:0;
+  box-shadow:inset 0 1px 2px rgba(255,255,255,.4);
 }
 .book-top::after{
   content:'';position:absolute;inset:0;
@@ -270,13 +270,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--black);cursor:
 
 /* ── BOOK DEFINITIONS ── */
 /* row 1 */
-.b1{width:28px;height:195px}.b2{width:36px;height:210px}.b3{width:22px;height:188px}
-.b4{width:44px;height:220px}.b5{width:30px;height:200px}.b6{width:26px;height:185px}
-.b7{width:38px;height:215px}.b8{width:24px;height:192px}
+/* row 1 — heights capped at 82% of shelf to always fit */
+.b1{width:28px;height:82%}.b2{width:36px;height:92%}.b3{width:22px;height:78%}
+.b4{width:44px;height:88%}.b5{width:30px;height:84%}.b6{width:26px;height:76%}
+.b7{width:38px;height:90%}.b8{width:24px;height:80%}
 /* row 2 */
-.b9{width:34px;height:172px}.b10{width:42px;height:185px}.b11{width:26px;height:168px}
-.b12{width:30px;height:178px}.b13{width:48px;height:190px}.b14{width:22px;height:162px}
-.b15{width:36px;height:180px}.b16{width:28px;height:175px}
+.b9{width:34px;height:85%}.b10{width:42px;height:90%}.b11{width:26px;height:78%}
+.b12{width:30px;height:82%}.b13{width:48px;height:88%}.b14{width:22px;height:74%}
+.b15{width:36px;height:86%}.b16{width:28px;height:80%}
 
 /* spine color schemes */
 .s-black{background:linear-gradient(90deg,#0d0d0d,#1a1a1a,#111)}
@@ -300,139 +301,31 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--black);cursor:
 .s-black .spine-dot{background:rgba(201,168,76,.4)}
 
 /* ── OPEN BOOK OVERLAY ── */
-.overlay{
-  position:fixed;inset:0;z-index:1000;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(5,3,2,0);
-  backdrop-filter:blur(0px);
-  transition:background .5s,backdrop-filter .5s;
-  pointer-events:none;
-}
-.overlay.open{
-  background:rgba(5,3,2,.88);
-  backdrop-filter:blur(8px);
-  pointer-events:all;
-}
 
-/* book spread container */
-.book-spread{
-  position:relative;
-  display:flex;
-  perspective:1200px;
-  opacity:0;
-  transform:translateY(60px) scale(.88);
-  transition:opacity .45s cubic-bezier(.4,0,.2,1) .15s,transform .45s cubic-bezier(.4,0,.2,1) .15s;
-}
-.overlay.open .book-spread{
-  opacity:1;
-  transform:translateY(0) scale(1);
-}
 
-/* spine center */
-.book-spine-center{
-  width:18px;
-  background:linear-gradient(90deg,#1a0e06,#2c1a0a,#1a0e06);
-  box-shadow:
-    -6px 0 20px rgba(0,0,0,.6),
-    6px 0 20px rgba(0,0,0,.6),
-    0 0 0 .5px rgba(201,168,76,.15);
-  z-index:2;
-  flex-shrink:0;
-  position:relative;
-}
-.book-spine-center::before{
-  content:'';position:absolute;left:6px;top:0;bottom:0;width:1px;
-  background:rgba(201,168,76,.1);
-}
+
+
+
+
 
 /* pages */
-.page-left,.page-right{
-  width:clamp(220px,28vw,360px);
-  height:clamp(280px,48vh,520px);
-  background:var(--cream);
-  padding:32px 28px;
-  position:relative;
-  overflow:hidden;
-  box-shadow:0 8px 40px rgba(0,0,0,.5);
-}
-.page-left{
-  border-radius:4px 0 0 4px;
-  transform-origin:right center;
-  transform:rotateY(-90deg);
-  transition:transform .55s cubic-bezier(.4,0,.2,1) .3s;
-  background:linear-gradient(100deg,#ede4d5,#f5efe6);
-}
-.page-right{
-  border-radius:0 4px 4px 0;
-  transform-origin:left center;
-  transform:rotateY(90deg);
-  transition:transform .55s cubic-bezier(.4,0,.2,1) .3s;
-  background:linear-gradient(80deg,#f5efe6,#ede4d5);
-}
-.overlay.open .page-left{transform:rotateY(0deg)}
-.overlay.open .page-right{transform:rotateY(0deg)}
+
+
+
+.overlay.open 
+.overlay.open 
 
 /* page inner shadow/texture */
-.page-left::before{
-  content:'';position:absolute;top:0;right:0;bottom:0;width:24px;
-  background:linear-gradient(90deg,transparent,rgba(0,0,0,.06));
-  pointer-events:none;
-}
-.page-right::before{
-  content:'';position:absolute;top:0;left:0;bottom:0;width:24px;
-  background:linear-gradient(270deg,transparent,rgba(0,0,0,.06));
-  pointer-events:none;
-}
-/* page lines */
-.page-left::after,.page-right::after{
-  content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 21px,rgba(0,0,0,.05) 22px);
-  pointer-events:none;
-}
-/* page number */
-.pg-num-l-bc{position:absolute;bottom:14px;left:24px;font-family:'Cormorant Garamond',serif;font-size:10px;color:rgba(107,15,26,.35);letter-spacing:2px}
-.pg-num-r-bc{position:absolute;bottom:14px;right:24px;font-family:'Cormorant Garamond',serif;font-size:10px;color:rgba(107,15,26,.35);letter-spacing:2px}
 
-/* page content */
-.page-inner{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;gap:10px}
-.pg-label{font-family:'Outfit',sans-serif;font-size:7px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;padding-bottom:8px;border-bottom:.5px solid rgba(201,168,76,.25)}
-.pg-h{font-family:'Cinzel',serif;font-size:clamp(13px,1.6vw,18px);color:#1a0e06;line-height:1.25;font-weight:600}
-.pg-rule-sm{width:24px;height:.5px;background:var(--maroon);margin:2px 0}
-.pg-it{font-family:'Cormorant Garamond',serif;font-size:clamp(11px,1.2vw,13.5px);color:#6b0f1a;font-style:italic;line-height:1.6}
-.pg-p{font-family:'Outfit',sans-serif;font-size:clamp(8px,.9vw,10px);color:#3a2e26;line-height:1.95;flex:1}
-.pg-pull-sm{
-  border-left:2px solid var(--maroon);padding:6px 10px;
-  background:rgba(107,15,26,.04);
-  font-family:'Cormorant Garamond',serif;font-size:clamp(10px,1.1vw,12.5px);
-  color:#6b0f1a;font-style:italic;line-height:1.5;
-}
-.pg-img-placeholder{
-  width:100%;flex:1;min-height:60px;
-  background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(107,15,26,.08));
-  border:.5px solid rgba(201,168,76,.2);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Cinzel',serif;font-size:clamp(18px,2.5vw,32px);
-  color:rgba(107,15,26,.1);font-weight:700;letter-spacing:4px;
-}
 
-/* close btn */
-.close-btn{
-  position:absolute;top:-44px;right:0;
-  font-family:'Outfit',sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;
-  color:rgba(201,168,76,.6);
-  background:transparent;border:none;cursor:none;
-  padding:6px 12px;
-  border:.5px solid rgba(201,168,76,.2);
-  transition:color .2s,border-color .2s;
-}
-.close-btn:hover{color:var(--gold);border-color:var(--gold)}
 
-/* book read label */
-.book-title-label{
-  position:absolute;bottom:-32px;left:50%;transform:translateX(-50%);
-  font-family:'Cinzel',serif;font-size:10px;color:rgba(201,168,76,.45);
-  letter-spacing:4px;text-transform:uppercase;white-space:nowrap;
-}
+
+
+
+
+
+
+
 
 /* ── FLOOR ── */
 .floor{
@@ -476,31 +369,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--black);cursor:
   background:rgba(5,3,2,.96);
   pointer-events:all;
 }
-.mag-frame-wrap{
-  position:relative;
-  width:94vw;height:92vh;
-  opacity:0;
-  transform:scale(.92) translateY(30px);
-  transition:opacity .45s cubic-bezier(.4,0,.2,1) .12s,transform .45s cubic-bezier(.4,0,.2,1) .12s;
-}
-.mag-overlay.open .mag-frame-wrap{
-  opacity:1;
-  transform:scale(1) translateY(0);
-}
-.mag-frame-wrap iframe{
-  width:100%;height:100%;
-  border:none;
-  background:#0a0806;
-  box-shadow:0 20px 80px rgba(0,0,0,.8);
-}
-.mag-bar{
-  position:absolute;top:-38px;left:0;right:0;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.mag-label{
-  font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;
-  color:rgba(201,168,76,.4);text-transform:uppercase;
-}
+
 .mag-close{
   font-family:'Outfit',sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;
   color:rgba(201,168,76,.5);background:transparent;
@@ -581,7 +450,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--black);cursor:
       <div class="shelf-side shelf-side-l"></div>
       <div class="shelf-side shelf-side-r"></div>
 
-      <div class="book b1 s-black" data-id="0" data-magazine="magazine.html" onclick="openBook(this)">
+      <div class="book b1 s-black" data-id="0" data-magazine="bhmagazine.html" onclick="openBook(this)">
         <div class="book-top"></div>
         <div class="spine">
           <div class="spine-dot"></div>
@@ -748,13 +617,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--black);cursor:
 
 <!-- MAGAZINE IFRAME OVERLAY -->
 <div class="mag-overlay" id="magOverlay">
-  <div class="mag-frame-wrap" id="magFrameWrap" style="display:none">
-    <div class="mag-bar">
-      <span class="mag-label" id="magLabel">Black Haven — The Journal</span>
-      <button class="mag-close" onclick="closeMag()">✕ &nbsp; Close</button>
-    </div>
-    <iframe id="magIframe" src="about:blank" title="Magazine"></iframe>
-  </div>
+
   <div class="coming-soon-wrap" id="comingSoon" style="display:none">
     <div class="cs-tag">Black Haven Library</div>
     <div class="cs-rule"></div>
@@ -771,13 +634,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--black);cursor:
 <!-- HINT -->
 <div class="hint" id="hint">Hover to browse · Click to open</div>
 
-<!-- OPEN BOOK OVERLAY -->
-<div class="overlay" id="overlay" onclick="closeOverlay(event)">
-  <div style="position:relative">
-    <button class="close-btn" onclick="closeBook()">✕ &nbsp; Close</button>
-    <div class="book-spread" id="spread">
-      <div class="page-left" id="pageLeft">
-        <div class="page-inner" id="pageLeftInner"></div>
         <div class="pg-num-l-bc" id="pgNumL">—</div>
       </div>
       <div class="book-spine-center"></div>
@@ -797,19 +653,12 @@ var mx=0,my=0,dx=0,dy=0;
 document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.opacity='1';});
 document.addEventListener('mouseleave',function(){cur.style.opacity='0';});
 (function ca(){dx+=(mx-dx)*.22;dy+=(my-dy)*.22;cur.style.left=dx+'px';cur.style.top=dy+'px';requestAnimationFrame(ca);})();
-document.querySelectorAll('.book,.close-btn,.flip-btn,.mag-close').forEach(function(el){
+document.querySelectorAll('.book,.mag-close').forEach(function(el){
   el.addEventListener('mouseenter',function(){cur.classList.add('big');});
   el.addEventListener('mouseleave',function(){cur.classList.remove('big');});
 });
 
-// ── SHELF OVERFLOW: visible on hover so lift animation isn't clipped ──
-document.querySelectorAll('.book').forEach(function(book){
-  var shelf = book.closest('.shelf');
-  book.addEventListener('mouseenter',function(){ shelf.style.overflow='visible'; });
-  book.addEventListener('mouseleave',function(){
-    if(!book.classList.contains('picking')) shelf.style.overflow='hidden';
-  });
-});
+
 
 // ── BOOK CONTENT DATA ──
 var books = [
@@ -934,62 +783,52 @@ function openBook(el) {
   currentBook = el;
   document.getElementById('hint').classList.add('hide');
 
-  // temporarily allow overflow for pick animation
-  var shelf = el.closest('.shelf');
-  if(shelf) shelf.style.overflow = 'visible';
-
-  el.classList.add('picking');
-  el.addEventListener('animationend', function h() {
-    el.style.visibility = 'hidden';
-    if(shelf) shelf.style.overflow = 'hidden';
-    el.removeEventListener('animationend', h);
+  // Clone book to body for pick animation — shelf stays overflow:hidden
+  var rect = el.getBoundingClientRect();
+  var clone = el.cloneNode(true);
+  clone.style.cssText = [
+    'position:fixed',
+    'left:' + rect.left + 'px',
+    'top:' + rect.top + 'px',
+    'width:' + rect.width + 'px',
+    'height:' + rect.height + 'px',
+    'margin:0',
+    'z-index:500',
+    'pointer-events:none',
+    'transform-origin:bottom center',
+    'animation:pickBook .55s cubic-bezier(.4,0,.2,1) forwards'
+  ].join(';');
+  document.body.appendChild(clone);
+  el.style.visibility = 'hidden';
+  clone.addEventListener('animationend', function() {
+    clone.remove();
   });
 
   setTimeout(function() {
     if (magazine) {
-      openMagazine(magazine, b ? b.title : 'Black Haven');
+      window.location.href = magazine;
     } else {
-      loadBook(id);
-      document.getElementById('overlay').classList.add('open');
+      // No magazine assigned — show coming soon overlay
+      showComingSoon(b ? b.title : 'Black Haven');
     }
-  }, 440);
+  }, 520);
 }
 
-function openMagazine(src, title) {
+function showComingSoon(title) {
   var mo = document.getElementById('magOverlay');
-  var fw = document.getElementById('magFrameWrap');
   var cs = document.getElementById('comingSoon');
-
-  // Check if magazine file is likely to exist
-  // For bhmagazine.html and other real files — show iframe
-  // For placeholder books — show coming soon
-  var realMags = ['bhmagazine.html'];
-  var isReal = realMags.indexOf(src) !== -1;
-
-  fw.style.display = isReal ? 'block' : 'none';
-  cs.style.display = isReal ? 'none' : 'flex';
-
-  if (isReal) {
-    document.getElementById('magIframe').src = src;
-    document.getElementById('magLabel').textContent = title;
-  } else {
-    document.getElementById('csTitle').textContent = title;
-    document.getElementById('csSub').textContent =
-      '"' + title + ' is being bound.\nCheck back next issue."';
-  }
-
+  cs.style.display = 'flex';
+  document.getElementById('csTitle').textContent = title;
+  document.getElementById('csSub').textContent =
+    '"This volume is being bound.\nCheck back next issue."';
   mo.classList.add('open');
 }
 
 function closeMag() {
-  var mo = document.getElementById('magOverlay');
-  mo.classList.remove('open');
+  document.getElementById('magOverlay').classList.remove('open');
   setTimeout(function(){
-    document.getElementById('magIframe').src = 'about:blank';
-    document.getElementById('magFrameWrap').style.display = 'none';
     document.getElementById('comingSoon').style.display = 'none';
   }, 450);
-
   if (currentBook) {
     currentBook.style.visibility = '';
     currentBook.classList.remove('picking');
@@ -997,45 +836,14 @@ function closeMag() {
   }
 }
 
-function loadBook(id) {
-  var b = books[id];
-  if (!b) return;
-  document.getElementById('pageLeftInner').innerHTML = buildPage(b.left);
-  document.getElementById('pgNumL').textContent = b.numL;
-  document.getElementById('pageRightInner').innerHTML = buildPage(b.right);
-  document.getElementById('pgNumR').textContent = b.numR;
-  document.getElementById('openTitle').textContent = b.title;
-}
 
-function buildPage(p) {
-  var h = '';
-  h += '<div class="pg-label">' + p.label + '</div>';
-  h += '<div class="pg-h">' + p.heading + '</div>';
-  if (p.rule) h += '<div class="pg-rule-sm"></div>';
-  if (p.italic) h += '<div class="pg-it">' + p.italic + '</div>';
-  if (p.img) h += '<div class="pg-img-placeholder">' + p.img + '</div>';
-  h += '<div class="pg-p">' + (p.body||'').replace(/\n/g,'<br>') + '</div>';
-  if (p.pull) h += '<div class="pg-pull-sm">' + p.pull + '</div>';
-  return h;
-}
 
-function closeBook() {
-  document.getElementById('overlay').classList.remove('open');
-  setTimeout(function() {
-    if (currentBook) {
-      currentBook.style.visibility = '';
-      currentBook.classList.remove('picking');
-      currentBook = null;
-    }
   }, 500);
 }
 
-function closeOverlay(e) {
-  if (e.target === document.getElementById('overlay')) closeBook();
-}
 
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { closeBook(); closeMag(); }
+  if (e.key === 'Escape') { closeMag(); }
 });
 
 // ── AMBIENT DUST PARTICLES ──
