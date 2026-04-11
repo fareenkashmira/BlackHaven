@@ -377,7 +377,102 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--black);cursor:
   cursor:none;transition:color .2s,border-color .2s;
 }
 .mag-close:hover{color:var(--gold);border-color:var(--gold)}
-/* coming-soon panel */
+/* ── QUOTE REVEAL OVERLAY ── */
+.quote-overlay{
+  position:fixed;inset:0;z-index:3000;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(5,3,2,0);
+  transition:background .5s ease;
+  pointer-events:none;
+}
+.quote-overlay.open{
+  background:rgba(5,3,2,.97);
+  pointer-events:all;
+}
+.quote-stage{
+  width:clamp(280px,52vw,680px);
+  display:flex;flex-direction:column;align-items:center;
+  gap:0;
+  text-align:center;
+  opacity:0;
+  transform:translateY(40px) scale(.96);
+  transition:opacity .55s .2s, transform .55s .2s;
+  padding:0 20px;
+}
+.quote-overlay.open .quote-stage{opacity:1;transform:translateY(0) scale(1)}
+.q-tag{
+  font-family:'Outfit',sans-serif;font-size:8px;letter-spacing:4px;
+  text-transform:uppercase;color:rgba(201,168,76,.35);
+  margin-bottom:22px;
+}
+.q-rule{width:36px;height:.5px;background:var(--gold-dim);margin:0 auto 28px;}
+.q-vol{
+  font-family:'Cinzel',serif;font-size:clamp(9px,1vw,12px);
+  color:rgba(201,168,76,.35);letter-spacing:5px;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.q-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(18px,2.6vw,34px);
+  color:var(--gold);letter-spacing:3px;
+  line-height:1.25;
+  margin-bottom:28px;
+}
+.q-divider{
+  display:flex;align-items:center;gap:14px;
+  width:100%;justify-content:center;
+  margin-bottom:28px;
+}
+.q-divider span{width:clamp(40px,8vw,100px);height:.5px;background:rgba(201,168,76,.18);}
+.q-divider em{
+  font-family:'Cormorant Garamond',serif;font-size:10px;
+  color:rgba(201,168,76,.3);font-style:normal;letter-spacing:4px;
+  text-transform:uppercase;
+}
+.q-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(17px,2.2vw,26px);
+  font-style:italic;
+  color:rgba(245,239,230,.82);
+  line-height:1.65;
+  max-width:520px;
+  margin-bottom:20px;
+}
+.q-attr{
+  font-family:'Outfit',sans-serif;font-size:9px;
+  letter-spacing:3px;text-transform:uppercase;
+  color:rgba(201,168,76,.3);
+  margin-bottom:36px;
+}
+.q-actions{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  margin-top:4px;
+}
+.q-open-btn{
+  font-family:'Outfit',sans-serif;font-size:9px;letter-spacing:4px;
+  text-transform:uppercase;
+  color:rgba(201,168,76,.9);background:transparent;
+  border:.5px solid rgba(201,168,76,.35);padding:9px 28px;
+  cursor:none;transition:color .2s,border-color .2s,background .2s;
+  display:flex;align-items:center;gap:8px;
+}
+.q-open-btn:hover{
+  color:var(--black);background:var(--gold);border-color:var(--gold);
+}
+.q-open-btn .arrow{
+  display:inline-block;
+  transition:transform .2s;
+}
+.q-open-btn:hover .arrow{transform:translateX(4px);}
+.q-back-btn{
+  font-family:'Outfit',sans-serif;font-size:8px;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(201,168,76,.28);background:transparent;
+  border:none;padding:4px 0;cursor:none;
+  transition:color .2s;
+}
+.q-back-btn:hover{color:rgba(201,168,76,.7);}
+
+/* coming-soon panel (kept for safety fallback) */
 .coming-soon-wrap{
   width:clamp(260px,38vw,480px);
   display:flex;flex-direction:column;align-items:center;gap:16px;
@@ -629,6 +724,25 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--black);cursor:
   </div>
 </div>
 
+<!-- QUOTE REVEAL OVERLAY -->
+<div class="quote-overlay" id="quoteOverlay">
+  <div class="quote-stage" id="quoteStage">
+    <div class="q-tag" id="qTag">Black Haven Library</div>
+    <div class="q-rule"></div>
+    <div class="q-vol" id="qVol"></div>
+    <div class="q-title" id="qTitle"></div>
+    <div class="q-divider"><span></span><em>excerpt</em><span></span></div>
+    <div class="q-quote" id="qQuote"></div>
+    <div class="q-attr" id="qAttr">— Black Haven</div>
+    <div class="q-actions">
+      <button class="q-open-btn" id="qOpenBtn" onclick="proceedToMagazine()">
+        Open Volume <span class="arrow">→</span>
+      </button>
+      <button class="q-back-btn" onclick="closeQuote()">← Back to Library</button>
+    </div>
+  </div>
+</div>
+
 <div class="floor"></div>
 
 <!-- HINT -->
@@ -775,15 +889,37 @@ var books = [
 ];
 
 var currentBook = null;
+var pendingMagazine = null;
+
+// Per-book quote data — edit these to change what appears on the quote page
+var bookQuotes = [
+  { quote: '"Every issue is a love letter to the women who dress with purpose."', attr: '— BH. Journal, Issue 01' },
+  { quote: '"Black — for depth. Haven — for belonging. A name forged in the space between conviction and comfort."', attr: '— Brand Story, Black Haven' },
+  { quote: '"The best design says nothing it does not mean. Restraint is not silence — it is discipline made visible."', attr: '— Design Notes, FK Studio' },
+  { quote: '"Each silhouette is a sentence. Each abaya, a self. This season is a conversation."', attr: '— The Abaya Edit, Spring 2025' },
+  { quote: '"The antidote to social media is not silence. It is depth. Conversation first. Everything else, second."', attr: '— Beyond, Concept Document' },
+  { quote: '"A confused user is not a user. They are a person you failed. Design is empathy made systematic."', attr: '— UX Notes, 2024' },
+  { quote: '"Serious craft. Unserious everything else. Every project is an experiment. Every brief, a conversation."', attr: '— Kooky Kafe, Studio Vol.1' },
+  { quote: '"There is philosophy in a hem. What you wear is what you say before you speak."', attr: '— Gold & Cloth, Essays' },
+  { quote: '"A typeface is a voice. Choose it accordingly. Type is the clothes that words wear."', attr: '— Typography Reference' },
+  { quote: '"She did not need to be loud to be heard. To choose coverage is to choose sovereignty."', attr: '— Modest & Loud, Identity' },
+  { quote: '"Graphic design, UX, editorial, and the spaces between. I design for the detail that only you will notice."', attr: '— Portfolio FK 2025' },
+  { quote: '"Colour is not decoration. It is argument. Black is not the absence of colour — it is the presence of gravity."', attr: '— Colour Theory, Notes' },
+  { quote: '"A space for the woman who was never the target audience — until now. We are building that."', attr: '— The Journal, Black Haven' },
+  { quote: '"In a loud world, choosing quiet is radical. The most elegant rooms have nothing you do not need."', attr: '— Silence & Style' },
+  { quote: '"A garment is not a costume. It is a decision. This season, we let the fabric do the talking."', attr: '— Editorial Vol. II' },
+  { quote: '"Behind every seam, a decision. Behind every decision, a belief. The detail is the whole point."', attr: '— Craft, 2024' }
+];
 
 function openBook(el) {
   var magazine = el.getAttribute('data-magazine');
   var id = parseInt(el.getAttribute('data-id'));
   var b = books[id];
   currentBook = el;
+  pendingMagazine = magazine || null;
   document.getElementById('hint').classList.add('hide');
 
-  // Clone book to body for pick animation — shelf stays overflow:hidden
+  // Clone book to body for pick animation
   var rect = el.getBoundingClientRect();
   var clone = el.cloneNode(true);
   clone.style.cssText = [
@@ -800,50 +936,67 @@ function openBook(el) {
   ].join(';');
   document.body.appendChild(clone);
   el.style.visibility = 'hidden';
-  clone.addEventListener('animationend', function() {
-    clone.remove();
-  });
+  clone.addEventListener('animationend', function() { clone.remove(); });
 
   setTimeout(function() {
-    if (magazine) {
-      window.location.href = magazine;
-    } else {
-      // No magazine assigned — show coming soon overlay
-      showComingSoon(b ? b.title : 'Black Haven');
-    }
+    showQuote(id, b);
   }, 520);
 }
 
-function showComingSoon(title) {
-  var mo = document.getElementById('magOverlay');
-  var cs = document.getElementById('comingSoon');
-  cs.style.display = 'flex';
-  document.getElementById('csTitle').textContent = title;
-  document.getElementById('csSub').textContent =
-    '"This volume is being bound.\nCheck back next issue."';
-  mo.classList.add('open');
+function showQuote(id, b) {
+  var qd = bookQuotes[id] || { quote: '"Every page, a world."', attr: '— Black Haven' };
+  document.getElementById('qVol').textContent = b ? b.title : 'Black Haven';
+  document.getElementById('qTitle').textContent = b && b.left ? b.left.heading : '';
+  document.getElementById('qQuote').textContent = qd.quote;
+  document.getElementById('qAttr').textContent = qd.attr;
+
+  // Show/hide open button based on whether magazine file is assigned
+  var btn = document.getElementById('qOpenBtn');
+  if (pendingMagazine) {
+    btn.style.display = 'flex';
+  } else {
+    btn.style.display = 'none';
+  }
+
+  document.getElementById('quoteOverlay').classList.add('open');
 }
 
-function closeMag() {
-  document.getElementById('magOverlay').classList.remove('open');
-  setTimeout(function(){
-    document.getElementById('comingSoon').style.display = 'none';
-  }, 450);
+function proceedToMagazine() {
+  if (pendingMagazine) {
+    window.location.href = pendingMagazine;
+  }
+}
+
+function closeQuote() {
+  document.getElementById('quoteOverlay').classList.remove('open');
   if (currentBook) {
     currentBook.style.visibility = '';
     currentBook.classList.remove('picking');
     currentBook = null;
   }
+  pendingMagazine = null;
 }
 
-
-
-  }, 500);
+// Legacy mag overlay close (kept for safety)
+function closeMag() {
+  document.getElementById('magOverlay').classList.remove('open');
+  setTimeout(function(){
+    var cs = document.getElementById('comingSoon');
+    if(cs) cs.style.display = 'none';
+  }, 450);
+  closeQuote();
 }
+
 
 
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { closeMag(); }
+  if (e.key === 'Escape') { closeQuote(); closeMag(); }
+});
+
+// Add cursor big effect to new quote buttons
+document.querySelectorAll('.q-open-btn,.q-back-btn').forEach(function(el){
+  el.addEventListener('mouseenter',function(){cur.classList.add('big');});
+  el.addEventListener('mouseleave',function(){cur.classList.remove('big');});
 });
 
 // ── AMBIENT DUST PARTICLES ──
