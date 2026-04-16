@@ -154,11 +154,7 @@
     </div>
     <div class="cart-items-list" id="cartItemsList">
       <div class="cart-empty">
-        <svg width="48" height="52" viewBox="0 0 26 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 1rem;">
-          <path d="M9 10 L9 5 L17 5 L17 10" stroke="#f4c6cf" stroke-width="1.8" fill="none" stroke-linejoin="miter"/>
-          <rect x="3" y="10" width="20" height="16" fill="#f4c6cf"/>
-          <text x="13" y="22" text-anchor="middle" font-family="Cinzel, serif" font-size="6.5" font-weight="700" fill="#e8a4b0" letter-spacing="0.5">BH</text>
-        </svg>
+        <img src="images/B.png" alt="" style="width:64px;height:64px;object-fit:contain;display:block;margin:0 auto 1rem;mix-blend-mode:multiply;opacity:0.35;">
         <p>Your cart is empty</p>
       </div>
     </div>
@@ -390,7 +386,7 @@
       total.textContent = '₹' + totalPrice.toLocaleString('en-IN');
 
       if (!keys.length) {
-        list.innerHTML = `<div class="cart-empty"><svg width="48" height="52" viewBox="0 0 26 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 1rem;"><path d="M9 10 L9 5 L17 5 L17 10" stroke="#f4c6cf" stroke-width="1.8" fill="none" stroke-linejoin="miter"/><rect x="3" y="10" width="20" height="16" fill="#f4c6cf"/><text x="13" y="22" text-anchor="middle" font-family="Cinzel, serif" font-size="6.5" font-weight="700" fill="#e8a4b0" letter-spacing="0.5">BH</text></svg><p>Your cart is empty</p></div>`;
+        list.innerHTML = `<div class="cart-empty"><img src="images/B.png" alt="" style="width:64px;height:64px;object-fit:contain;display:block;margin:0 auto 1rem;mix-blend-mode:multiply;opacity:0.35;"><p>Your cart is empty</p></div>`;
         return;
       }
       list.innerHTML = keys.map(k => {
